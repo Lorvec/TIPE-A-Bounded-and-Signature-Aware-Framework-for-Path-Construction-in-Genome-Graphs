@@ -1,3 +1,8 @@
+
+# TIPE: Bounded and Signature-Aware Path Construction in Genome Graphs
+
+This repository provides a reference implementation of **TIPE (Tag-Based Iterative Path Expansion)**, a framework for controlled and scalable path construction in directed graphs, with applications to genome graph analysis.
+
 ---
 
 ## Overview
@@ -38,77 +43,123 @@ Install dependencies:
 
 ```bash
 pip install matplotlib pandas
-Data
+````
+
+---
+
+## Data
 
 This repository evaluates the TIPE framework on genome graphs in GFA-derived form.
 
-The specific E. coli graph used in our experiments is not distributed with this repository.
+The specific *E. coli* graph used in our experiments is **not distributed** with this repository.
 
 To run the real-graph validation script, any GFA-formatted genome graph can be used. Publicly available pangenome graph resources include:
 
-https://github.com/vgteam/vg
-https://github.com/pangenome/pggb
+* [https://github.com/vgteam/vg](https://github.com/vgteam/vg)
+* [https://github.com/pangenome/pggb](https://github.com/pangenome/pggb)
 
 Place your GFA file in the repository root and rename it to:
 
+```text
 EcoliGraph_MGC.gfa
-Usage
-1. Real graph validation
+```
+
+---
+
+## Usage
+
+### 1. Real graph validation
+
+```bash
 python run_real_ecoli_validation.py
-2. Synthetic held-out recovery experiment
+```
+
+### 2. Synthetic held-out recovery experiment
+
+```bash
 python run_synthetic_recovery_experiment.py
-3. Real hard-anchor recovery experiment
+```
+
+### 3. Real hard-anchor recovery experiment
+
+```bash
 python run_real_anchor_recovery_experiment.py
-Output
-Real graph validation
+```
+
+---
+
+## Output
+
+### Real graph validation
 
 Outputs are saved in:
 
+```text
 real_ecoli_results/
+```
 
 Includes:
 
-real_ecoli_validation.csv
-fig_real_paths_vs_k.png
-fig_real_retention_pruning_vs_k.png
-fig_real_cycle_reject_vs_k.png
-fig_real_runtime_vs_k.png
-Synthetic recovery experiment
+* `real_ecoli_validation.csv`
+* `fig_real_paths_vs_k.png`
+* `fig_real_retention_pruning_vs_k.png`
+* `fig_real_cycle_reject_vs_k.png`
+* `fig_real_runtime_vs_k.png`
+
+---
+
+### Synthetic recovery experiment
 
 Outputs are saved in:
 
+```text
 synthetic_recovery_results/
+```
 
 Includes:
 
-synthetic_recovery_results.csv
-fig_synthetic_read_recall_vs_budget.png
-fig_synthetic_relaxed_path_recall_vs_budget.png
-synthetic_candidate_paths.txt
-Real anchor recovery experiment
+* `synthetic_recovery_results.csv`
+* `fig_synthetic_read_recall_vs_budget.png`
+* `fig_synthetic_relaxed_path_recall_vs_budget.png`
+* `synthetic_candidate_paths.txt`
+
+---
+
+### Real anchor recovery experiment
 
 Outputs are saved in:
 
+```text
 real_anchor_recovery_results/
+```
 
 Includes:
 
-real_anchor_recovery_raw.csv
-real_anchor_recovery_summary.csv
-real_anchor_debug.csv
-fig_real_anchor_read_recall_vs_budget.png
-fig_real_anchor_relaxed_path_recall_vs_budget.png
-Notes
-The real-graph validation experiment operates on a prefix-induced subgraph of fixed size.
-All experiments enforce simple paths (no repeated nodes).
-Retention is bounded per signature class.
-The synthetic and real-anchor experiments illustrate behavior under high branching and partial observation.
-Reproducibility
+* `real_anchor_recovery_raw.csv`
+* `real_anchor_recovery_summary.csv`
+* `real_anchor_debug.csv`
+* `fig_real_anchor_read_recall_vs_budget.png`
+* `fig_real_anchor_relaxed_path_recall_vs_budget.png`
+
+---
+
+## Notes
+
+* The real-graph validation experiment operates on a prefix-induced subgraph of fixed size.
+* All experiments enforce **simple paths** (no repeated nodes).
+* Retention is bounded per signature class.
+* The synthetic and real-anchor experiments illustrate behavior under high branching and partial observation.
+
+---
+
+## Reproducibility
 
 All experiments are deterministic under the default settings provided in the scripts (fixed random seeds).
 
 The repository is intended as a minimal and transparent reference implementation of the TIPE framework used in the associated manuscript.
 
-License
+---
+
+## License
 
 Add a license file (e.g., MIT License) if you plan to distribute or reuse this code.
