@@ -74,5 +74,4 @@ All experiments use fixed random seeds, so results should be consistent across r
 
 ## Reference
 
-If you use this code, please cite:
 
