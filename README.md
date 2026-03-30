@@ -1,165 +1,77 @@
-
 # TIPE: Bounded and Signature-Aware Path Construction in Genome Graphs
 
-This repository provides a reference implementation of **TIPE (Tag-Based Iterative Path Expansion)**, a framework for controlled and scalable path construction in directed graphs, with applications to genome graph analysis.
-
----
+This repository contains a reference implementation of TIPE (Tag-Based Iterative Path Expansion), a framework for controlled path construction in directed graphs, with a focus on genome graph applications.
 
 ## Overview
 
-Graph-based representations are increasingly used to model genomic variation. However, enumerating paths in such graphs is inherently challenging due to the combinatorial growth of possible traversals.
+Graph-based representations are widely used to model genomic variation, but path enumeration quickly becomes infeasible due to combinatorial growth.
 
-TIPE addresses this problem by:
-- decoupling **path expansion** from **path retention**
-- enforcing **bounded retention per signature class**
-- enabling controlled exploration without materializing the full exponential set of candidate paths
+TIPE is a simple idea: we separate path expansion from path retention, and keep only a limited number of paths per structural signature. This allows exploration to remain bounded without explicitly generating all possible paths.
 
-The framework is designed to provide a principled and interpretable approach to bounded path construction.
+The code here reproduces the main experiments used in the paper, both on synthetic examples and on real graph data.
 
-This repository contains reproducible experiments corresponding to the synthetic and real-graph evaluations presented in the associated manuscript.
+## Contents
 
----
+- run_real_ecoli_validation.py  
+  Runs TIPE on a real genome graph and outputs basic scaling metrics (paths, pruning, runtime)
 
-## Repository contents
+- run_synthetic_recovery_experiment.py  
+  Small synthetic experiment showing how TIPE recovers held-out paths under branching
 
-- `run_real_ecoli_validation.py`  
-  Runs TIPE on a real genome graph and produces cumulative metrics and scaling behavior (paths, pruning, runtime).
-
-- `run_synthetic_recovery_experiment.py`  
-  Synthetic experiment evaluating recovery of held-out paths under controlled branching structure.
-
-- `run_real_anchor_recovery_experiment.py`  
-  Real-graph experiment evaluating recovery on high-branching neighborhoods ("hard anchors").
-
----
+- run_real_anchor_recovery_experiment.py  
+  Similar idea, but applied to real graph neighborhoods (high branching regions)
 
 ## Requirements
 
-- Python 3.9+
-- `matplotlib`
-- `pandas`
+Python 3.9 or newer
 
-Install dependencies:
+Packages:
+- matplotlib
+- pandas
 
-```bash
+Install with:
 pip install matplotlib pandas
-````
-
----
 
 ## Data
 
-This repository evaluates the TIPE framework on genome graphs in GFA-derived form.
+The E. coli graph used in the paper is not included.
 
-The specific *E. coli* graph used in our experiments is **not distributed** with this repository.
+To run the real experiment, you can use any GFA genome graph. For example:
+https://github.com/vgteam/vg  
+https://github.com/pangenome/pggb  
 
-To run the real-graph validation script, any GFA-formatted genome graph can be used. Publicly available pangenome graph resources include:
+Put the GFA file in the project folder and rename it to:
 
-* [https://github.com/vgteam/vg](https://github.com/vgteam/vg)
-* [https://github.com/pangenome/pggb](https://github.com/pangenome/pggb)
-
-Place your GFA file in the repository root and rename it to:
-
-```text
 EcoliGraph_MGC.gfa
-```
-
----
 
 ## Usage
 
-### 1. Real graph validation
+Run the scripts directly:
 
-```bash
-python run_real_ecoli_validation.py
-```
-
-### 2. Synthetic held-out recovery experiment
-
-```bash
-python run_synthetic_recovery_experiment.py
-```
-
-### 3. Real hard-anchor recovery experiment
-
-```bash
-python run_real_anchor_recovery_experiment.py
-```
-
----
+python run_real_ecoli_validation.py  
+python run_synthetic_recovery_experiment.py  
+python run_real_anchor_recovery_experiment.py  
 
 ## Output
 
-### Real graph validation
+Each script writes its results to a separate folder:
 
-Outputs are saved in:
+- real_ecoli_results/
+- synthetic_recovery_results/
+- real_anchor_recovery_results/
 
-```text
-real_ecoli_results/
-```
-
-Includes:
-
-* `real_ecoli_validation.csv`
-* `fig_real_paths_vs_k.png`
-* `fig_real_retention_pruning_vs_k.png`
-* `fig_real_cycle_reject_vs_k.png`
-* `fig_real_runtime_vs_k.png`
-
----
-
-### Synthetic recovery experiment
-
-Outputs are saved in:
-
-```text
-synthetic_recovery_results/
-```
-
-Includes:
-
-* `synthetic_recovery_results.csv`
-* `fig_synthetic_read_recall_vs_budget.png`
-* `fig_synthetic_relaxed_path_recall_vs_budget.png`
-* `synthetic_candidate_paths.txt`
-
----
-
-### Real anchor recovery experiment
-
-Outputs are saved in:
-
-```text
-real_anchor_recovery_results/
-```
-
-Includes:
-
-* `real_anchor_recovery_raw.csv`
-* `real_anchor_recovery_summary.csv`
-* `real_anchor_debug.csv`
-* `fig_real_anchor_read_recall_vs_budget.png`
-* `fig_real_anchor_relaxed_path_recall_vs_budget.png`
-
----
+These include CSV files with metrics and a few simple plots.
 
 ## Notes
 
-* The real-graph validation experiment operates on a prefix-induced subgraph of fixed size.
-* All experiments enforce **simple paths** (no repeated nodes).
-* Retention is bounded per signature class.
-* The synthetic and real-anchor experiments illustrate behavior under high branching and partial observation.
-
----
+- Paths are always simple (no repeated nodes)
+- Retention is bounded per signature
+- The real experiments use a prefix subgraph of the full graph
 
 ## Reproducibility
 
-All experiments are deterministic under the default settings provided in the scripts (fixed random seeds).
-
-The repository is intended as a minimal and transparent reference implementation of the TIPE framework used in the associated manuscript.
-
----
+All experiments use fixed random seeds, so results should be consistent across runs.
 
 ## License
 
-Add a license file (e.g., MIT License) if you plan to distribute or reuse this code.
+Add a license if you want to share or reuse the code.
