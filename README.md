@@ -76,4 +76,3 @@ All experiments use fixed random seeds, so results should be consistent across r
 
 If you use this code, please cite:
 
-D. Kalatzis, "TIPE: Bounded and Signature-Aware Path Construction in Genome Graphs", 2026.
