@@ -26,14 +26,24 @@ matplotlib
 Install dependencies:
 
 pip install matplotlib
+
 Data
 
-The E. coli pangenome graph used in this study was obtained from publicly available sources.
-Any GFA-formatted pangenome graph can be used as input.
+This repository evaluates the TIPE framework on a real genome graph in GFA format.
 
-After downloading, place the file in the root directory of the repository and rename it to:
+The specific E. coli graph used in our experiments is not distributed with this repository.
+
+To run the code, any GFA-formatted genome graph can be used.
+
+Users may provide their own GFA file or obtain publicly available pangenome graphs from resources such as:
+
+- https://github.com/vgteam/vg
+- https://github.com/pangenome/pggb
+
+Place the GFA file in the repository root and rename it to:
 
 EcoliGraph_MGC.gfa
+
 Usage
 
 Run the experiment:
