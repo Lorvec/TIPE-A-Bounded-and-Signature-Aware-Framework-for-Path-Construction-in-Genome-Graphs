@@ -72,6 +72,8 @@ These include CSV files with metrics and a few simple plots.
 
 All experiments use fixed random seeds, so results should be consistent across runs.
 
-## License
+## Reference
 
-Add a license if you want to share or reuse the code.
+If you use this code, please cite:
+
+D. Kalatzis, "TIPE: Bounded and Signature-Aware Path Construction in Genome Graphs", 2026.
