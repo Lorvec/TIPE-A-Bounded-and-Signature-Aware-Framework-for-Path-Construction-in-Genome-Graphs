@@ -9,6 +9,7 @@ Graph-based representations are widely used to model genomic variation, but path
 TIPE is a simple idea: we separate path expansion from path retention, and keep only a limited number of paths per structural signature. This allows exploration to remain bounded without explicitly generating all possible paths.
 
 The code here reproduces the main experiments used in the paper, both on synthetic examples and on real graph data.
+The implementation is intentionally minimal and designed for clarity and reproducibility.
 
 ## Contents
 
